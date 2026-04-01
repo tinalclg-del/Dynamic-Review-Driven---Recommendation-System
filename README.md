@@ -14,15 +14,20 @@ movie-recommendation-system/
 
 ├── requirements.txt          # Python dependencies
 
-
-
 │
+
 ├── data/                     # All CSV datasets
+
 │   ├── IMDB Bollywood Movie Dataset.csv
+
 │   ├── IMDB Ratings.csv
+
 |   ├── IMDB Review Dataset.csv
+
 │   └── Award dataset.csv
+
 │
+
 ├── models/                   # Saved ML models
 │   ├── vectorizer.pkl
 │   └── sentiment_model.pkl
