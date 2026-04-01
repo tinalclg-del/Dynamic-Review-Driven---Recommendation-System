@@ -65,5 +65,8 @@ movie-recommendation-system/
 NOTE:
 
 The csv file named " IMDB Review Dataset.csv " is on the drive as it exceeds the limit of size to upload on GitHub. Which actually should be in the data folder.
+Here is the link to download:
+
+https://drive.google.com/uc?export=download&id=1v1HF0bwzdjOHeHGN-zT-efkmWMnEVzqY
 
 
