@@ -73,3 +73,7 @@ And it is the link of drive:
 
 https://drive.google.com/file/d/1v1HF0bwzdjOHeHGN-zT-efkmWMnEVzqY/view?usp=drive_link
 
+Colab link (just used to built a basic structure of the project):
+
+https://colab.research.google.com/drive/1Wk2krk6jhgokIyzRnD7syjRQ7RBySBvP?usp=sharing
+
