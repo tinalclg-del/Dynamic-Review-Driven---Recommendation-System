@@ -69,4 +69,7 @@ Here is the link to download:
 
 https://drive.google.com/uc?export=download&id=1v1HF0bwzdjOHeHGN-zT-efkmWMnEVzqY
 
+And it is the link of drive:
+
+https://drive.google.com/file/d/1v1HF0bwzdjOHeHGN-zT-efkmWMnEVzqY/view?usp=drive_link
 
