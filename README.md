@@ -9,10 +9,12 @@ It also includes interactive features like voice toggle, review submission, and 
 FOLDER STRUCTURE:
 
 movie-recommendation-system/
-
-│
+|
 ├── app.py                     # Main Flask backend (server)
 ├── requirements.txt          # Python dependencies
+
+
+
 │
 ├── data/                     # All CSV datasets
 │   ├── IMDB Bollywood Movie Dataset.csv
