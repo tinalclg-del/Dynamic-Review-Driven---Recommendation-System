@@ -60,9 +60,11 @@ movie-recommendation-system/
 
 └── notebooks/                
 
-    └── train_model.py
+    └──  train_model.py    # model to make .pkl
     
 
 NOTE:
 
 The csv file named " IMDB Review Dataset.csv " is on the drive as it exceeds the limit of size to upload on GitHub. Which actually should be in the data folder.
+
+
