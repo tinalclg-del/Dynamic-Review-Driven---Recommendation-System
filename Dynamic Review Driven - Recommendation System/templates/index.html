@@ -3,48 +3,23 @@
 <head>
     <title>Movie Recommendation System</title>
 
-<style>
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 5px;
-    border-radius: 6px;
-
-    position: absolute;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
 </head>
-<body style="font-family: Droid Sans; background:#f2f2f2; margin:0;">
 
-    <h1 style="text-align:center; padding:20px; font-family: Droid Sans; background:#c8d8e4; color:#069494;">
+<body>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <h1 class="header">
         🎬 Movie Recommendation System
     </h1>
 
-    <div style="width:50%; margin:auto; background:#c8d8e4; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(200, 216, 228, 0.5);">
+    <div class="container">
 
         <form action="/recommend" method="POST">
            
-            <select name="genre" required style="width:100%; padding:10px; border-radius:5px; border:none;">
+            <select name="genre" >
                 <option value="">-- Select Genre --</option>
 
                 <option value="Action" {% if genre == "Action" %}selected{% endif %}>Action</option>
@@ -68,20 +43,18 @@
                 <option value="War" {% if genre == "War" %}selected{% endif %}>War</option>
             </select>
 
-            <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+            <div class="flex-row">
 
-	    <button type="submit" 
-	        style="flex:1; padding:10px; background:#069494; color:black; border:none; border-radius:5px; cursor:pointer;">
+	    <button type="submit" class="btn">
         	Get Recommendations
 	    </button>
 
 	<div class="tooltip">
-	    <button onclick="toggleSpeech()" 
-	        style="background:none; border:none; cursor:pointer; font-size:18px;">
+	    <button onclick="toggleSpeech()" class="icon-btn">
         	🔇
 	    </button>
 	<span class="tooltiptext">Toggle voice. 
-				Press Spacebar to intrrupt.</span>
+				 Press Spacebar to intrrupt.</span>
 	</div>    
 	
 	</div>
@@ -90,40 +63,38 @@
 </div>
 	
     {% if movies %}
-    <div style="width:60%; margin:auto; margin-top:30px; background:none">
-        <h2 style="text-align:center; font-family: Droid Sans; color:#069494;">Top Movies ({{ genre }})</h2>
+    <div class="movies-container">
+        <h2 class="section-title">Top Movies ({{ genre }})</h2>
 
-        <ul style="list-style:none; padding:0;">
+        <ul class="movies">
             {% for movie in movies %}
-                <li style="background:#c8d8e4; margin-bottom:20px; padding:15px; border-radius:10px; box-shadow:0 0 8px rgba(200, 216, 228,0.1);">
+                <li class="movie-card">
 	
-                    <h3 class="movie-title" style="margin:0; font-family: Droid Sans; color:#17252a;">{{ movie.title }}</h3>
+                    <h3 class="movie-title">{{ movie.title }}</h3>
 
-	<div style="display:flex; align-items:center; gap:550px; margin-top:10px;">
+	<div class="flex-rows">
 
                     <p>⭐ Ratings: {{ movie.score }}</p>
 
 			<button type="button" 
 			    onclick="toggleReview('{{ loop.index }}')" 
-			    style="margin-top:10px; background:#069494; border:none; padding:8px; border-radius:5px; cursor:pointer;">
+			    class="btn">
 			    Add Review
 			</button>
 
 		</div>
 
-	<div id="review-box-{{ loop.index }}" style="display:none; margin-top:10px;">
+	<div id="review-box-{{ loop.index }}" class="review-box">
 
                     <form action="/submit_review" method="post">
                         <input type="hidden" name="movie_name" value="{{ movie.title }}">
                         <input type="hidden" name="imdb_id" value="{{ movie.imdb_id }}">
                         <input type="hidden" name="genre" value="{{ genre }}">
 
-                        <textarea name="review" placeholder="Write your review..." required
-                            style="width:95%; padding:10px; border-radius:5px; border:none;"></textarea>
+                        <textarea name="review" placeholder="Write your review..."></textarea>
                         <br><br>
 
-                        <button type="submit"
-                            style="background:#069494; color:black; padding:8px 12px; border:none; border-radius:5px; cursor:pointer;">
+                        <button type="submit" class="btn">
                             Submit Review
                         </button>
                     </form>
@@ -134,77 +105,6 @@
         </ul>
     </div>
     {% endif %}
-
-<script>
-let speechEnabled = false;
-let currentSpeech = null;
-
-function toggleSpeech() {
-    speechEnabled = !speechEnabled;
-
-    if (!speechEnabled) {
-        window.speechSynthesis.cancel();
-    } else {
-        speakRecommendations(); 
-    }
-
-    document.getElementById("voiceBtn").innerText =
-        speechEnabled ? "🔊 Voice ON" : "🔇 Voice OFF";
-}
-
-
-function speakText(text) {
-    if (!speechEnabled) return;
-
-    window.speechSynthesis.cancel();
-
-    const speech = new SpeechSynthesisUtterance(text);
-    currentSpeech = speech;
-
-    speech.rate = 1;
-    speech.pitch = 1;
-
-    window.speechSynthesis.speak(speech);
-}
-
-
-function speakRecommendations() {
-    let movies = document.querySelectorAll(".movie-title");
-
-    if (movies.length === 0) return; 
-
-    let text = "Here are your recommended movies: ";
-
-    movies.forEach(movie => {
-        text += movie.innerText + ", ";
-    });
-
-    speakText(text);
-}
-
-
-window.onload = function () {
-    speakRecommendations();
-};
-
-
-document.addEventListener("keydown", function(event) {
-    if (event.code === "Space") {
-        window.speechSynthesis.cancel();
-    }
-});
-
-function toggleReview(id) {
-    const box = document.getElementById("review-box-" + id);
-    
-    if (box.style.display === "none") {
-        box.style.display = "block";
-    } else {
-        box.style.display = "none";
-    }
-}
-
-</script>
 
 </body>
 </html>
