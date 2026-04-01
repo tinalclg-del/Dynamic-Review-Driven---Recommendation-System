@@ -10,8 +10,8 @@ FOLDER STRUCTURE:
 
 movie-recommendation-system/
 
-|
 ├── app.py                     # Main Flask backend (server)
+
 ├── requirements.txt          # Python dependencies
 
 
