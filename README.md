@@ -59,7 +59,6 @@ movie-recommendation-system/
 │
 
 └── notebooks/                
-
     └──  train_model.py    # model to make .pkl
     
 
